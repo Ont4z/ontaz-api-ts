@@ -50,4 +50,4 @@ jobs:
         NEW_VERSION: ${{ steps.version.outputs.version }}
       run: |
         docker push iv4npc/ontaz-api-ts:$NEW_VERSION
-        docker build -t iv4npc/ontaz-api-ts:latest
+        docker push iv4npc/ontaz-api-ts:latest
