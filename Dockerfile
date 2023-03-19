@@ -1,5 +1,7 @@
 FROM node:19.2-alpine3.16
 
+EXPOSE 80
+
 WORKDIR /app
 
 COPY . .
