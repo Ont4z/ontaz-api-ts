@@ -39,7 +39,7 @@ jobs:
         echo "Fin del login"
 
     - name: Build  Docker Image
-      env: 
+      env:
         NEW_VERSION: ${{ steps.version.outputs.version }}
       run: |
         docker build -t iv4npc/ontaz-api-ts:$NEW_VERSION .
