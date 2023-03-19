@@ -40,6 +40,4 @@ export const loginWithEmailAndPassword = async (req: Request, res: Response) => 
         token,
         msg: 'Login Success'
     })
-
-    return res.json(user)
 }
