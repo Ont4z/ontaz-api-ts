@@ -1,35 +1,53 @@
-# name: Docker Image CI
+name: Docker Image CI
 
-# on:
-#   push:
-#     branches: [ "main" ]
-#   pull_request:
-#     branches: [ "main" ]
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
 
-# jobs:
+jobs:
 
-#   build:
+  build:
 
-#     runs-on: ubuntu-latest
+    runs-on: ubuntu-latest
 
-#     steps:
-#     - name: Checkout code
-#       uses: actions/checkout@v3
-#       with:
-#         fetch-depth: 0
-#     - name: Docker login
-#       env: 
-#         DOCKER_USER: ${{ secrets.DOCKER_USER }}
-#         DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
-#       run: |
-#         echo "Iniciando login"
-#         docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
-#         echo "Fin del login"
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
 
-#     - name: Build  Docker Image
-#       run: |
-#         docker build -t iv4npc/ontaz-api-ts:0.0.1 .
+    - name: Git Semantic Version
+      uses: PaulHatch/semantic-version@v4.0.3
+      with:
+        major_pattern: "major:"
+        minor_patter: "minor:"
+        format: "${major}.${minor}.${patch}-prerelease${increment}"
+      id: version
 
-#     - name: Push  Docker Image
-#       run: |
-#         docker push iv4npc/ontaz-api-ts:0.0.1
+
+    - name: Docker login
+      env: 
+        DOCKER_USER: ${{ secrets.DOCKER_USER }}
+        DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+        NEW_VERSION: ${{ steps.version.outputs.version }}
+
+      run: |
+        echo "Iniciando login"
+        docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
+        echo "Fin del login"
+
+    - name: Build  Docker Image
+      env: 
+        NEW_VERSION: ${{ steps.version.outputs.version }}
+      run: |
+        docker build -t iv4npc/ontaz-api-ts:$NEW_VERSION .
+        docker build -t iv4npc/ontaz-api-ts:latest .
+
+    - name: Push  Docker Image
+      env: 
+        NEW_VERSION: ${{ steps.version.outputs.version }}
+      run: |
+        docker push iv4npc/ontaz-api-ts:$NEW_VERSION
+        docker build -t iv4npc/ontaz-api-ts:latest
