@@ -1,27 +1,35 @@
-name: Docker Image CI
+# name: Docker Image CI
 
-on:
-  push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+# on:
+#   push:
+#     branches: [ "main" ]
+#   pull_request:
+#     branches: [ "main" ]
 
-jobs:
+# jobs:
 
-  build:
+#   build:
 
-    runs-on: ubuntu-latest
+#     runs-on: ubuntu-latest
 
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
-      with:
-        fetch-depth: 0
-    - name: Docker login
-      env: 
-        DOCKER_USER: ${{ secrets.DOCKER_USER }}
-        DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
-      run: |
-        echo "Iniciando login"
-        docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
-        echo "Fin del login"
+#     steps:
+#     - name: Checkout code
+#       uses: actions/checkout@v3
+#       with:
+#         fetch-depth: 0
+#     - name: Docker login
+#       env: 
+#         DOCKER_USER: ${{ secrets.DOCKER_USER }}
+#         DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+#       run: |
+#         echo "Iniciando login"
+#         docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
+#         echo "Fin del login"
+
+#     - name: Build  Docker Image
+#       run: |
+#         docker build -t iv4npc/ontaz-api-ts:0.0.1 .
+
+#     - name: Push  Docker Image
+#       run: |
+#         docker push iv4npc/ontaz-api-ts:0.0.1
