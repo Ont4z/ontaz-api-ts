@@ -1,6 +1,6 @@
 import { Request, Response } from 'express'
 import bcryptjs from 'bcryptjs'
-
+//good
 import User from '../models/users.model'
 import { generateJWTToken } from '../helpers/jwt.helper';
 
