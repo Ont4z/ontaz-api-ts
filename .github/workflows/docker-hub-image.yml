@@ -18,6 +18,12 @@ jobs:
       with:
         fetch-depth: 0
 
+    - name: Create .env file
+      uses: ozaytsev86/create-env-file@v1
+      with:
+        MONGODB_CN: ${{ secrets.MONGODB_CN }}
+        SECRETORPRIVATEKEY: ${{ secrets.SECRETORPRIVATEKEY }}
+
     - name: Git Semantic Version
       uses: PaulHatch/semantic-version@v4.0.3
       with:
