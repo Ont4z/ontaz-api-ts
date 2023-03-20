@@ -5,13 +5,15 @@ const { dbConnection } = require('../database/config');
 
 import userRoutes from '../routes/user.route';
 import authRoutes from '../routes/auth.route';
+import categoryRoutes from '../routes/category.route';
 
 class Server {
     private app: Application;
     public port: string;
     private apiPaths = {
         users: '/api/users',
-        auth: '/api/auth'
+        auth: '/api/auth',
+        category: '/api/category',
     }
 
     constructor() {
@@ -42,6 +44,7 @@ class Server {
     routes() {
         this.app.use(this.apiPaths.users, userRoutes);
         this.app.use(this.apiPaths.auth, authRoutes);
+        this.app.use(this.apiPaths.category, categoryRoutes);
     }
 
     listen() {
