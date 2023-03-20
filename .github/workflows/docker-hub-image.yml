@@ -42,8 +42,8 @@ jobs:
       env:
         NEW_VERSION: ${{ steps.version.outputs.version }}
       run: |
-        docker build -t iv4npc/ontaz-api-ts:$NEW_VERSION .
-        docker build -t iv4npc/ontaz-api-ts:latest .
+        docker build -t -p 80:80 iv4npc/ontaz-api-ts:$NEW_VERSION .
+        docker build -t -p 80:80 iv4npc/ontaz-api-ts:latest .
 
     - name: Push  Docker Image
       env: 
