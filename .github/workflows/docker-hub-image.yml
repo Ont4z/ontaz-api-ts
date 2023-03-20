@@ -42,8 +42,8 @@ jobs:
       env:
         NEW_VERSION: ${{ steps.version.outputs.version }}
       run: |
-        docker build -t iv4npc/ontaz-api-ts:$NEW_VERSION -e MONGODB_CN=${{ secrets.MONGODB_CN }} SECRETORPRIVATEKEY=${{  secrets.SECRETORPRIVATEKEY }} .
-        docker build -t iv4npc/ontaz-api-ts:latest -e MONGODB_CN=${{ secrets.MONGODB_CN }} SECRETORPRIVATEKEY=${{  secrets.SECRETORPRIVATEKEY }} .
+        docker build -t iv4npc/ontaz-api-ts:$NEW_VERSION .
+        docker build -t iv4npc/ontaz-api-ts:latest .
 
     - name: Push  Docker Image
       env: 
