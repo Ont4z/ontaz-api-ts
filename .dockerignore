@@ -2,6 +2,6 @@ dist/
 node_modules/
 README.md
 Dockerfile
-
+.env
 .git
 .dockerignore

@@ -1,4 +1,4 @@
-FROM node:19.2-alpine3.16
+FROM node:16-alpine3.16
 
 WORKDIR /app
 
@@ -14,6 +14,5 @@ RUN npm run test
 
 # RUN npm install --prod
 # RUN npm run build
-EXPOSE 80
 
 CMD ["npm", "start"]
